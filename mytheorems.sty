@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MYTHEOREMS.STY - define a bunch of standard theorem styles for LaTeX
+%% David J. Chase following Jon Trowbridge's THEOREMS.STY (Univ. of
+%%  Chicago 1993)
+%% but using theorem.sty from latex2e\tools package
+%%
+%% September, 1991:
+%%  Initial version created.
+%% February, 1992:
+%%  Custom theorems added.
+%% September, 1992:
+%%  Added \reset@font command to \customtheorem, fixing bug introduced by
+%%  the new version of theorem.sty
+%% October, 1992:
+%%  Added ``notation'' environment.
+%% July, 1993:
+%%  Added ``thmenum'' environment.
+%% May, 1995:
+%%  Translated to new theorem.sty macros in `tools' package.
+%%
+%% Added 1995/11/01:  options 'nonumber' and 'sequential'
+%% \nonumbers command added for compatibility
+%% 'number' and 'nonsequential' options are defaults
+%% sequential numbering gives one counter for all theorem styles declared
+%% here.
+%% 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Documentation:
+% The ``mytheorems'' style option defines a number of theorem-like environments
+% for you.  It also provides you with some control over how theorems are
+% numbered.  A proof environment is also provided.
+%
+% The theorem-like environments are divided into three catagories ---
+% Theorem: theorem corollary lemma sublemma proposition conjecture
+% Definition: definition
+% Remark: remark example
+%
+% By default, everything is numbered by section.  To change how things are
+% numbered, issue one or more of the following commands in the preamble of
+% your document:
+%  \theoremunit{<unit>} - number environments in the theorem catagory by <unit>
+%  \definitionunit{<unit>} - number envs. in the definition catagory by <unit>
+%  \remarkunit{<unit>} - number envs. in the remark catagory by <unit>
+%  \numberallby{<unit>} - number all envs. in by <unit>
+% For example, \theoremunit{chapter} would cause all theorems to be numbered
+% with respect to chapters.
+%
+% To suppress the numbering of all theorem-like environments, issue the
+% command \nonumbers in the preamble.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{mytheorems}[1995/12/07]
+\typeout{Document Option `mytheorems': Pre-defined Theorem Styles.}
+%
+%
+\RequirePackage{theorem}[1994/12/01]
+%% The extensions to the latex2e theorem env. by F. Mittelbach
+%
+\DeclareOption{nonumber}{
+\renewcommand{\djc@theorem@numb}{\nonumbers}
+}
+%
+\DeclareOption{number}{
+\renewcommand{\djc@theorem@numb}{}
+}
+%
+\DeclareOption{nonsequential}{
+\renewcommand{\djc@theorem@seq}{
+\theoremstyle{plain}
+\theorembodyfont{\slshape}
+\theoremheaderfont{\normalfont\bfseries}
+% Theorem-like environments
+\newtheorem{theorem}{Theorem}[\theorem@unit]
+\newtheorem{corollary}[theorem]{Corollary}%   gets numbered like a theorem.
+%\newtheorem{remark}[theorem]{Remark}%   gets numbered like a theorem.
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{sublemma}[theorem]{Sublemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+% Conjectures are different, so I'll give them their own numbers.
+\newtheorem{conjecture}{Conjecture}[\theorem@unit]
+% Definitions
+\theorembodyfont{\normalfont}
+\newtheorem{definition}[theorem]{Definition}
+% Remark-like environments
+\newtheorem{remark}{\normalfont\itshape{}Remark}[\remark@unit]
+\newtheorem{example}{\normalfont\itshape{}Example}[\remark@unit]
+\newtheorem{claim}{\normalfont\itshape{}Claim}[\remark@unit]
+\newtheorem{notation}{\normalfont\itshape{}Notation}[\remark@unit]
+}}
+%
+\DeclareOption{sequential}{
+\renewcommand{\djc@theorem@seq}{
+\theoremstyle{plain}
+\theorembodyfont{\slshape}
+\theoremheaderfont{\normalfont\bfseries}
+% Theorem-like environments
+\newtheorem{theorem}{Theorem}[\theorem@unit]
+\newtheorem{corollary}[theorem]{Corollary}%   gets numbered like a theorem.
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{sublemma}[theorem]{Sublemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theorembodyfont{\normalfont}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{\normalfont\itshape{}Remark}
+\newtheorem{example}[theorem]{\normalfont\itshape{}Example}
+\newtheorem{claim}[theorem]{\normalfont\itshape{}Claim}
+\newtheorem{notation}[theorem]{\normalfont\itshape{}Notation}
+}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Proofs
+\theorembodyfont{\normalfont}
+%%% proof stuff  copied from amsart.sty
+%
+\providecommand{\RIfM@}{\relax\protect\ifmmode}%in amsmath.sty
+\providecommand{\qedsymbol}{\RIfM@\bgroup\else$\bgroup\aftergroup$\fi
+ \vcenter{\hrule\hbox{\vrule\@height.6em\kern.6em\vrule}\hrule}\egroup}
+\providecommand{\qed}{\RIfM@\else\unskip\nobreak\fi\hfill\quad\qedsymbol}
+%
+\newenvironment{proof}[1][Proof]{
+  \par\topsep6\p@\@plus6\p@
+  \trivlist
+  \item[\hskip\labelsep\it{}#1.]\ignorespaces}{\qed\endtrivlist}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorem numbering: By default, this sets things up so that theorems
+% are numbered by the section.
+\def\theorem@unit{section}
+\def\theoremunit#1{\gdef\theorem@unit{#1}}
+\def\definition@unit{section}
+\def\definitionunit#1{\gdef\definition@unit{#1}}
+\def\remark@unit{section}
+\def\remarkunit#1{\gdef\remark@unit{#1}}
+\def\numberallby#1{\theoremunit{#1}\definitionunit{#1}\remarkunit{#1}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Suppressing numbering
+\newcommand{\djc@theorem@numb}{}
+\newcommand{\djc@theorem@seq}{}
+\newcommand{\nonumbers}{
+ \renewcommand{\thetheorem}{}
+ \renewcommand{\thecorollary}{}
+ \renewcommand{\thelemma}{}
+ \renewcommand{\thesublemma}{}
+ \renewcommand{\theproposition}{}
+ \renewcommand{\theconjecture}{}
+ \renewcommand{\thedefinition}{}
+ \renewcommand{\theexample}{}
+ \renewcommand{\theremark}{}
+}
+\@onlypreamble\nonumbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\ExecuteOptions{nonsequential,numbers}
+\ProcessOptions
+%
+\AtEndOfPackage{\djc@theorem@seq\djc@theorem@numb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput
+% end of mytheorems.sty

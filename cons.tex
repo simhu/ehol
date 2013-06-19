@@ -1,0 +1,1453 @@
+%\documentclass[12pt,a4paper]{amsart}
+\documentclass[10pt,a4paper]{article}
+\ifx\pdfpageheight\undefined\PassOptionsToPackage{dvips}{graphicx}\else%
+\PassOptionsToPackage{pdftex}{graphicx}
+\PassOptionsToPackage{pdftex}{color}
+
+
+\usepackage{amsmath}
+
+
+\fi
+
+%\usepackage{diagrams} didn't work for me
+\usepackage[all]{xy}
+%Marc's macros
+\newcommand{\depi}[3]{\Pi{#1{:}#2.\,#3}}
+\newcommand{\sigm}[3]{\Sigma{#1{:}#2.\,#3}}
+\newcommand{\lam}[2]{\lambda{#1.\,#2}}
+\newcommand{\lamt}[3]{\lambda{#1:#2.\,#3}}
+%\newcommand{\allLF}{{{\forall}}}
+%\newcommand{\omgLF}{{{\Omega}}}
+\newcommand{\sbr}[1]{[\![#1]\!]}
+\newcommand{\pbr}[1]{(\!(#1)\!)}
+\newcommand{\semr}[1]{[\![#1]\!]_{\rho}}
+\newcommand{\semrO}[1]{[\![#1]\!]^{\Omega}_{\rho}}
+\newcommand{\sems}[1]{[\![#1]\!]_{\sigma}}
+\newcommand{\vsbr}[1]{{[\![#1]\!]}_0}
+\newcommand{\psbr}[1]{{[\![#1]\!]}_1}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\red}{~~{\to}~~}
+\newcommand{\unphsi}{{\univ_{\varphi\psi}}}
+\newcommand{\unphis}{{\univ_{\varphi_0\varphi_1}}}
+\newcommand{\unpsis}{{\univ_{\psi_0\psi_1}}}
+\newcommand{\extfs}{{\ext_{f_0 f_1}}}
+\newcommand{\extas}{{\ext_{a_0 a_1}}}
+\newcommand{\apO}{{ap_\Omega}}
+\newcommand{\eqA}{{eq_A}}
+\newcommand{\rtr}{~~{\stackrel{*}{\to}}~~}
+\newcommand{\semO}[1]{[\![#1]\!]^{\Omega}}
+\newcommand{\foo}{\mathit{foo}}
+\newcommand{\SN}{\mathit{SN}}
+\newcommand{\GamU}{\Gamma_{\!U}}
+\newcommand{\Ex}{\mathsf{Ex}}
+%end Marc's macros
+
+\usepackage{proof} % used for derivations
+
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+
+
+
+\newcommand\myfrac[2]{
+ \begin{array}{c}
+ #1 \\
+ \hline \hline 
+ #2
+\end{array}}
+
+
+
+\newcommand{\mkbox}[1]{\ensuremath{#1}}
+\newcommand{\Id}{{\sf Id}}
+\newcommand{\Idd}{{\sf Id}}
+\newcommand{\subst}{{\sf subst}}
+\newcommand{\res}{{\sf res}}
+\newcommand{\Int}{{\bf I}}
+\newcommand{\Ref}{{\sf ref}}
+\newcommand{\sem}[1]{\langle #1\rangle}
+\def\SET{{U}}
+
+\newcommand{\pair}[1]{{\langle #1 \rangle}}
+
+\newcommand{\Prod}[2]{\displaystyle\prod _{#1}~#2}
+\newcommand{\Sum}[2]{\displaystyle\sum _{#1}~#2}
+\newcommand{\gothic}{\mathfrak}
+\newcommand{\omicron}{*}
+\newcommand{\gP}{{\gothic p}}
+\newcommand{\lift}[1]{\tilde{#1}}
+\newcommand{\gM}{{\gothic M}}
+\newcommand{\gN}{{\gothic N}}
+\newcommand{\rats}{\mathbb{Q}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\usepackage{epsf}
+\usepackage{epsfig}
+% \usepackage{isolatin1}
+\usepackage{a4wide}
+\usepackage{verbatim}
+\usepackage{proof}
+\usepackage{latexsym}
+\usepackage{amssymb}
+% \usepackage{stmaryrd}
+\newcommand{\abs}[2]{\lambda #1 . #2}            % abstraction of #1 in #2
+\usepackage{mytheorems}
+%\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\GI}{{\sf f}}
+\newcommand{\ext}{{\sf ext}}
+\newcommand{\univ}{{\sf univ}}
+
+%\documentstyle{article}
+\newcommand{\IF}[3]{{{\sf if}~#1~{\sf then}~#2~{\sf else}~#3}}
+\newcommand{\TT}{{1}}
+\newcommand{\FF}{{0}}
+\newcommand{\lfpi}[3]{(\Pi #1{:}#2)#3}
+\newcommand{\lflam}[2]{\lambda #1.#2}
+\newcommand{\HA}{{\sf HA}}
+\newcommand{\AC}{{\sf AC}}
+\newcommand{\HAw}{\hbox{\sf{HA}$^{\omega}$}}
+\newcommand{\EM}{\hbox{\sf{EM}}}
+\newcommand{\DC}{\hbox{\sf{DC}}}
+\newcommand{\BB}{\hbox{\sf{B}}}
+
+\def\NN{\hbox{\sf N}}
+\def\EE{\hbox{\sf E}}
+\def\JJ{\hbox{\sf J}}
+\def\Type{\hbox{\sf Type}}
+%\def\Box{\hbox{\sf B}}
+\def\PER{\hbox{\sf PER}}
+\def\FUN{\Pi}
+\def\ELEM{\hbox{\sf El}}
+\def\SS{\hbox{\sf S}}
+\def\GET{\hbox{\sf get}}
+\def\TP{\hbox{\sf TP}}
+\def\N0{\hbox{\sf N}_0}
+\def\ZERO{\hbox{\sf zero}}
+\def\SUCC{\hbox{S}}
+\setlength{\oddsidemargin}{0in} % so, left margin is 1in
+\setlength{\textwidth}{6.27in} % so, right margin is 1in
+\setlength{\topmargin}{0in} % so, top margin is 1in
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{9.19in} % so, foot margin is 1.5in
+\setlength{\footskip}{.8in}
+
+% Definition of \placetitle
+% Want to do an alternative which takes arguments\ref{},
+% for the names, authors etc.
+
+\newcommand{\lbr}{\lbrack\!\lbrack}
+\newcommand{\rbr}{\rbrack\!\rbrack}
+%\newcommand{\sbr}[2] {\lbr #1 \rbr_{#2}}  % interpretation of the terms
+\newcommand{\PAIR}[2] {{<}#1,#2{>}}  % interpretation of the terms
+\newcommand{\add}{\mathsf{add}}
+\newcommand{\app}{\mathsf{app}}
+\newcommand{\APP}{\mathsf{APP}}
+\newcommand{\BAPP}[2]{\mathsf{app}(#1,#2)}
+\newcommand{\nat}{{N}}
+\newcommand{\NNO}{\hbox{\sf N$_0$}}
+\newcommand{\UU}{\hbox{\sf U}}
+\newcommand{\VV}{\hbox{\sf V}}
+\newcommand{\EXIT}{\mathsf{exit}}
+\newcommand{\natrec}{\hbox{\sf{natrec}}}
+\newcommand{\boolrec}{\hbox{\sf{boolrec}}}
+\newcommand{\nil}{[]}
+\newcommand{\cons}{\mathsf{cons}}
+\newcommand{\lists}{\mathsf{list}}
+\newcommand{\VEC}{\mathsf{vec}}
+\newcommand{\reclist}{\mathsf{RecL}}
+\newcommand{\vect}{\mathsf{vect}}
+\newcommand{\brec}{\Phi}
+\newcommand{\brecp}{\Psi}
+\newcommand{\true}{\mathsf{true}}
+\newcommand{\false}{\mathsf{false}}
+\newcommand{\bool}{{N_2}}
+\newcommand{\ifte}[3]{\mathsf{if}\ #1\ \mathsf{then}\ #2\ \mathsf{else}\ #3}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\Con}{{\sf Con}}
+\newcommand{\Typ}{{\sf Type}}
+\newcommand{\Elem}{{\sf Elem}}
+\newcommand{\Char}{{\sf Char}}
+\newcommand{\atmost}{\exists _{\leqslant 1}}
+%\newcommand{\id}{{\sf id}}
+\newcommand{\id}{{1}}
+\newcommand{\eq}{{\sf eq}}
+\newcommand{\pp}{{\sf p}}
+\newcommand{\qq}{{\sf q}}
+\newcommand{\Sp}{{\sf Sp}}
+\newcommand{\comp}{{\sf comp}}
+
+\begin{document}
+
+\title{A computational interpretation of extensional higher-order logic}
+\author{Marc Bezem and Thierry Coquand}
+\date{}
+\maketitle
+
+
+%\rightfooter{}
+\section{Intuition and Motivation}
+\subsection{Interpretation of simple type theory}
+
+ We start with types
+$$
+A~::=~\Omega~|~A\rightarrow A
+$$
+where $\Omega$ is the type of truth-values.
+
+\medskip
+
+ We have a graded structure for the values: values at level $0$ represent the usual value, and
+values at level $1$ represent the paths.
+
+\medskip
+
+ Each type has a path relation $a_0\leadsto _A a_1$ and if $\mu:c_0\leadsto_{A\rightarrow B} c_1$ 
+we can apply it to $\omega:a_0\leadsto _{A} a_1$ and get
+$$
+\mu~\omega:c_0~a_0\leadsto c_1~a_1
+$$
+
+
+\medskip
+
+ The new idea w.r.t. previous interpretations is to introduce
+$$
+\eta~a: a\leadsto _A a
+$$
+as a {\em canonical form}, for any $a:A$ and $A$ arbitrary type.
+
+\medskip
+
+ The other canonical form at type $\Omega$ is $(f,g):\varphi_0\leadsto_{\Omega} \varphi_1$ provided
+$f:\varphi_0\rightarrow\varphi_1$ and $g:\varphi_1\rightarrow \varphi_0$.
+ We define $(f,g)^+ = f$ and $(f,g)^- = g$, while $(\eta\varphi)^+ = (\eta\varphi)^-$ is the identity function.
+
+\medskip
+
+ An environment of values is an object of the form $\rho = (x_1=u_1,\dots,x_n = u_n)$ and
+an environment of paths is an object of the form $\alpha = (x_1 = \omega_1,\dots,x_n=\omega_n)$
+(the length $n$ can be $0$ in both cases). We write $\rho(x_i) = u_i$ and $\alpha(x_i) = \omega_i$.
+We write $\eta\rho$ for $(x_1=\eta u_1,\dots,x_n = \eta u_n)$.
+
+\medskip
+
+ The operational semantics is then
+$$
+x\rho\rightarrow \rho(x)~~~~~~~~~~~
+(\lambda x.b)\rho~u ~\rightarrow~ b(\rho,x=u)~~~~~~(c~a)\rho ~\rightarrow~ c\rho~(a\rho)~~~~~~~
+$$
+for the values of level $0$. Notice that this is the usual operational semantics.
+For the path values, we have
+$$
+x\alpha\rightarrow \alpha(x)~~~~~~~~~~~
+(\lambda x.b)\alpha~\omega ~\rightarrow~ b(\alpha,x=\omega)~~~~~(c~a)\alpha ~\rightarrow~ c\alpha~(a\alpha)
+$$
+$$
+\eta v~(\eta u) ~\rightarrow~ \eta (v~u)~~~~~~~
+\eta ((\lambda x.b)\rho)~\omega ~\rightarrow~ b(\eta\rho,x=\omega)
+$$
+where $\omega$ is in canonical form and not of the form $\eta u$,
+that is, it can be of the form $(\lambda x.b)\alpha$ or $(f,g)$.
+
+ The important rule is
+$$
+\eta ((\lambda x.b)\rho)~\omega ~\rightarrow~ b(\eta\rho,x=\omega)
+$$
+since in this rule, we use the {\em syntactical form} of the value $v = (\lambda x.b)\rho$
+to compute $(\eta v)~\omega$.
+
+
+\subsection{Extension}
+
+ We can add the operations $\varphi\Rightarrow\psi:\Omega$ if $\varphi~\psi:\Omega$
+and $\forall x:A.\varphi:\Omega$ if $\varphi:\Omega~(x:A)$.
+
+\medskip
+
+ Until now, it was not clear how to treat universal quantification in a ``satisfactory'' way.
+
+\medskip
+
+ The operational semantics is
+$$
+(\forall x.\varphi)\alpha^+~s_0~u ~=~\varphi(\alpha,x = \eta u)^+~(s_0~ u)
+$$
+$$
+(\forall x.\varphi)\alpha^-~s_1~u ~=~\varphi(\alpha,x = \eta u)^-~(s_1~ u)
+$$
+and
+$$
+(\varphi\Rightarrow\psi)\alpha^+~s_0~u = \psi\alpha^+~(s_0~(\varphi\alpha^-~u))
+$$
+$$
+(\varphi\Rightarrow\psi)\alpha^-~s_1~u = \psi\alpha^-~(s_1~(\varphi\alpha^+~u))
+$$
+
+
+\subsection{Difference with Gandy's interpretation}
+
+ The approach by Gandy consists in defining at the same time the ``path'' relations 
+{\em and} a predicate which characterizes the ``extensional'' values (the ones sending
+equal to equal). Operationally, this can be seen as the following changes in the interpretation
+\begin{itemize}
+\item the type of functions is now restricted to the functions that are extensional
+(in particular the semantics of values at level $0$ is {\em not} the same as the usual semantics)
+\item the operation $\eta$ is now a {\em defined} function and not a {\em constructor}
+\end{itemize}
+
+ We now give an operational version of Gandy's interpretation.
+
+\medskip
+
+  A $0$-level value at type $\Omega$ is a fixed (impredicative) universe.
+
+ A path $X_0\leadsto_{\Omega} X_1$ is a pair $(f,g)$ with $f:X_0\rightarrow X_1$ and
+$g:X_1\rightarrow X_0$. We define
+$$
+\eta_{\Omega} X = (\lambda x.x,\lambda x.x)
+$$
+
+ A value at type $A\rightarrow B$ is a pair $(w,\mu)$ where $w$ is an ordinary function value
+from $A$ to $B$ and $\mu$ a path $\alpha:w\leadsto _{A\rightarrow B} w$, that is, a function such 
+that $\mu~\omega:w~u_0\leadsto_{B} w~u_1$ if $\omega:u_0\leadsto_{A} u_1$. 
+The latter expresses that $w$ is extensionally equal to itself, 
+and is a special case of the definition of
+a path from a value $v_0$ to a value $v_1$ at type $A\rightarrow B$, to be defined
+in the next paragraph. If $v=(w,\mu)$ is a value at type $A\rightarrow B$ we write 
+$w = \pi_1 v$ and $\mu = \pi_2 v$.
+
+ We define a path $\alpha:v_0\leadsto _{A\rightarrow B} v_1$ to be a function 
+sending a path $\omega:u_0\leadsto _A u_1$ to a path
+$$
+\alpha~\omega:\pi_1 v_0~u_0\leadsto_B \pi_1 v_1~u_1
+$$
+
+ At all types we want that $\eta v$ is a path from $v$ to $v$, so we define 
+$$
+\eta_{A\rightarrow B} v = \pi_2 v
+$$
+
+ If $\rho = (x_1=u_1,\dots,x_n=u_n)$ we define as before $\eta\rho = (x_1 = \eta u_1,\dots, x_n = \eta u_n)$.
+
+\medskip
+ 
+ The operational semantics is then
+$$
+x\rho\rightarrow \rho(x)~~~~~~~~~~~
+(\pi_1 (\lambda x.b)\rho)~u ~\rightarrow~ b(\rho,x=u)~~~~~~(c~a)\rho ~\rightarrow~ (\pi_1 c\rho)~(a\rho)~~~~~~~
+$$
+for the values of level $0$. Notice that this is {\em not} anymore the usual operational semantics.
+For the path values, we have
+$$
+x\alpha\rightarrow \alpha(x)~~~~~~~~~~~
+(\lambda x.b)\alpha~\omega ~\rightarrow~ b(\alpha,x=\omega)~~~~~(c~a)\alpha ~\rightarrow~ c\alpha~(a\alpha)
+$$
+together with
+$$
+(\lambda x.b)\rho~\omega ~\rightarrow~ (f,f')
+~~~\mbox{where}~~~f\,u \to b(\rho,x = u)
+~~~\mbox{and}~~~f'\,\omega \to b(\eta\rho,x = \omega)
+$$
+{\bf The case (f u) seems to be defined twice}\\
+ This semantics validates only the laws of {\em weak} conversion, while the previous semantics validates
+$\beta,\eta$-conversion.
+
+
+
+\subsection{Internalization of equality}
+
+ We define first a composition operation
+$$
+\comp^+~\omega~\omega_0~\omega_1 : v_0\leadsto v_1
+$$
+given $\omega:u_0\leadsto u_1$ and $\omega_0:u_0\leadsto v_0$ and $\omega_1:u_1\leadsto v_1$.
+We have at all types
+$$
+\comp^+~\omega~\eta u_0~\eta u_1 ~\rightarrow~ \omega~~~~~~~
+\comp^+~\eta u_0~\eta u_0~\omega_1 ~\rightarrow~ \omega_1~~~~~~
+\comp^+~\eta u_1~\omega_0~\eta u_1 ~\rightarrow~ \omega_0
+$$
+and we define in the other cases
+$$
+\comp^+_{\Omega}~\omega~\omega_0~\omega_1  ~\rightarrow~  
+(\omega_1^+ \circ  \omega^+ \circ \omega_0^-,\omega_0^+ \circ  \omega^- \circ \omega_1^-)
+$$
+and
+$$
+\comp^+_{A\rightarrow B}~\mu~\mu_0~\mu_1~\omega ~\rightarrow~\comp^+_B~(\mu~\omega)~(\mu_0~\eta u_0)~(\mu_1~\eta u_1)
+$$
+
+ We define in a similar way
+$$
+\comp^-~\omega~\omega_0~\omega_1 : u_0\leadsto u_1
+$$
+given $\omega:v_0\leadsto v_1$ and $\omega_0:u_0\leadsto v_0$ and $\omega_1:u_1\leadsto v_1$.
+
+\medskip
+
+ We add a new way to forming terms of type $\Omega$ by taking $t =_A t'$ to be of type
+$\Omega$ if $t$ and $t'$ are of type $A$.
+
+ A canonical value of $(t =_A t')\rho$ is of the form $\omega$ where $\omega$ is a path
+$t\rho\leadsto_A t'\rho$.
+
+ We add also the proof term $\Ref~t$ proving $t=_A t$ at any type $A$:
+\[
+\infer{\Gamma\vdash\Ref\,t:t=_A t}{\Gamma\vdash{t:A}}
+\]
+with the computation
+$$
+(\Ref~t)\rho ~\rightarrow~ \eta (t\rho)
+$$
+and we define
+$$
+(t =_A t')\alpha ~\rightarrow~ (f,g)
+$$
+where
+$$
+f~\omega = \comp^+~\omega~t\alpha~t'\alpha~~~~~~~~~~g~\omega = \comp^-~\omega~t\alpha~t'\alpha~~~~~~~~~~
+$$
+ 
+ We can internalize the extensionality laws
+$$
+\frac{\Gamma\vdash p:\forall x_0~x_1:A.~x_0=_A x_1\rightarrow f_0~x_0 =_ {B} f_1~x_1}
+     {\Gamma\vdash \ext~p: f_0 =_{A\rightarrow B} f_1}
+$$
+by taking
+$$
+(\ext~p)\rho ~\rightarrow~ \ext~p\rho
+$$
+where, if $\omega:u_0\leadsto_A u_1$
+$$
+\ext~w~\omega ~\rightarrow~ w~u_0~u_1~\omega
+$$
+
+ Finally, we add a weak form of univalence
+$$
+\frac{\Gamma\vdash p:\varphi\Rightarrow \psi~~~~~\Gamma\vdash q:\psi\Rightarrow\varphi}
+     {\Gamma\vdash \univ (p,q) : \varphi =_{\Omega} \psi}
+$$
+with 
+$$
+\univ (p,q)\rho ~\rightarrow~ (p\rho,q\rho)
+$$
+
+
+\section{A Simple Type Theory for Extensional Equality}
+
+There are the following three types of judgements:
+\begin{itemize}
+\item $\Gamma \vdash {}$ (meaning $\Gamma$ is a well-typed context)
+\item $\Gamma \vdash {T}$ (type $T$ is well-typed in context $\Gamma$)
+\item $\Gamma \vdash {t:T}$ (in context $\Gamma$, term $t$ has type $T$, or type $t$ is in universe $T$)
+\end{itemize}
+
+The typing rules in Figure~\ref{typing_rules} include the standard rules for 
+a simply typed calculus with two universes $\Omega,U$. The universe $\Omega$
+is a universe of propositions, whereas $U$ is the universe of types of propositional 
+functions, functionals etc. This part of the type theory is much like the
+PTS~\cite{Barendregtea} with $(*,*),(\Box,\Box)$, 
+called weak (predicative) $\lambda{\omega}$, denoted $\lambda\underline{\omega}$.
+New are the types for 
+extensional equality and the constructors $\Ref,\ext,\univ$ for inhabitants
+of these. New is also the application of objects of equality types (last rule).
+These equality types should not interfere with other types,
+whence they are neither in $\Omega$, nor in $U$.
+
+Equality judgements such as $e: \varphi =_\Omega \psi$ can play two roles.
+On one hand, $e$ can be seen as pair of proofs $e^+,e^-$ of logical propositions.
+For example, $x^+(x{=}e)$, that is, 
+the value of $x^+$ in the value environment $(x{=}e)$, 
+reduces to $e^+$ and has type $\varphi\to\psi$. 
+On the other hand, $e: a_0 =_A a_1$ can be seen as a path from $a_0$
+to $a_1$ in $A$. If we take, for example, 
+$\Ref\,(\lambda x.\,b) : (\lambda x.\,b) =_{A\to B} (\lambda x.\,b)$, then 
+$(\Ref\,(\lambda x.\,b))\,e : (\lambda x.\,b) a_0 =_B (\lambda x.\,b) a_1$. 
+Reducing $(\Ref\,\lambda x.\,b)\,e$ leads, if $e$ is not degenerated, 
+to $b\pbr{x{=}e}$, that is, the path $b$ in the path environment $\pbr{x{=}e}$.
+We denote path environments by $\pbr{\cdots}$.
+
+\begin{figure}[h]
+\[ \infer{\vdash}{} \quad\quad\quad\quad
+\infer{\Gamma,x:A\vdash}{\Gamma\vdash A} \quad\quad\quad\quad
+\infer[u\in\set{\Omega,U}]{\Gamma\vdash A}{\Gamma\vdash A:u} \]
+
+\[ 
+\infer{\Gamma\vdash{\Omega:U}}{\Gamma\vdash} \quad\quad
+\infer[u\in\set{\Omega,U}]{\Gamma\vdash {A}\to{B} :u}{\Gamma\vdash A:u\quad\Gamma\vdash B:u}
+\]
+
+\[
+\infer[x{:}A \in\Gamma]{\Gamma\vdash x:A}{\Gamma\vdash} \quad\quad
+\infer[t_i =_{w} t'_i]{\Gamma\vdash p: t'_0 =_A t'_1}
+{\Gamma\vdash p: t_0 =_A t_1 \quad \Gamma\vdash t_i : A \quad \Gamma\vdash t'_i : A }
+\]
+
+\[ 
+\infer[u\in\set{\Omega,U}]{\Gamma\vdash\lam{x}{b}:{A}\to{B}}
+{\Gamma,x:A\vdash b:B \quad \Gamma \vdash A:u \quad \Gamma \vdash B:u} 
+\quad\quad
+\infer{\Gamma\vdash f\,a:B}
+  {\Gamma\vdash {A}\to{B}:U\quad\Gamma\vdash f:{A}\to{B}\quad\Gamma\vdash a:A} 
+\]
+
+\[
+\infer{\Gamma\vdash a_0 =_A a_1}
+{\Gamma\vdash A:U \quad \Gamma\vdash a_0:A \quad \Gamma\vdash a_1:A}\quad\quad
+\infer{\Gamma\vdash \bot:\Omega}{\Gamma\vdash}
+%\infer{\Gamma\vdash 0:\top}{\Gamma\vdash}\quad\quad
+%\infer{\Gamma\vdash \bot:\Omega}{\Gamma\vdash}\quad\quad
+\]
+
+\[ 
+\infer{\Gamma\vdash\Ref\,a: a =_A a}{\Gamma\vdash A:U \quad \Gamma\vdash a:A} 
+\quad\quad
+\infer{\Gamma\vdash\unphsi(p,q):\varphi =_\Omega \psi}
+{\Gamma\vdash \varphi:\Omega\quad \Gamma\vdash \psi:\Omega\quad
+\Gamma\vdash p:\varphi\to\psi\quad \Gamma\vdash q:\psi\to\varphi} 
+\]
+
+\[
+\infer{\Gamma\vdash \extfs\,(\lambda\,x_0 x_1 e.\,t): f_0 =_{A\to B} f_1}
+{\Gamma\vdash A\to B :U \quad\Gamma\vdash f_i: A\to B \quad
+\Gamma,x_0:A,x_1:A,e: x_0 =_A x_1 \vdash t: f_0 x_0 =_B f_1 x_1} 
+\]
+
+\[
+\infer{\Gamma\vdash e^+: \varphi\to\psi \quad \Gamma\vdash e^-: \psi\to\varphi} 
+{\Gamma\vdash e: \varphi =_{\Omega} \psi}
+\quad\quad
+\infer{\Gamma\vdash p\,e: f_0\,a_0 =_B f_1\,a_1} 
+  {\Gamma\vdash p: f_0 =_{A\to B} f_1 \quad \Gamma\vdash e : a_0 =_A a_1}
+\]
+%\infer{\Gamma\vdash d_i\,e: A} removed, destroys "U-context principle"
+%  {\Gamma\vdash A:U \quad\Gamma\vdash a_i : A \quad\Gamma\vdash e: a_0 =_A a_1}
+\caption{Typing rules (with named variables).
+\label{typing_rules}}
+\end{figure}
+
+\begin{lemma}\label{typetrivia} Positive trivia:
+if $\Gamma\vdash A{\to}B:u$, then $\Gamma\vdash A:u$ and $\Gamma\vdash B:u$;
+if $\Gamma\vdash T$ or $\Gamma\vdash M:T$, then $\Gamma\vdash$;
+if $\Gamma\vdash p: t_0 =_A t_1$, then $\Gamma\vdash A:U$, $\Gamma\vdash t_i:A$ 
+and $\Gamma\vdash t_0 =_A t_1$;
+if $\Gamma\vdash M:T$, then $\Gamma\vdash T$;
+
+Negative trivia:
+if $\Gamma\vdash$, then
+$\Gamma\not\vdash U$,
+$\Gamma\not\vdash U:U$,
+$\Gamma\not\vdash \Omega:\Omega$,
+$\Gamma\not\vdash U:\Omega$,
+$\Gamma\not\vdash T{\to}U$,
+$\Gamma\not\vdash U{\to}T$.
+\end{lemma}
+\begin{proof}By inspection of the typing rules.\end{proof}
+The following lemma proves that every well-typed $A:U$ is a closed, simple type over $\Omega$.
+\begin{lemma}\label{UtypesOmegasimple}
+If $\Gamma\vdash A:U$, then $\vdash A:U$ and $A$ is a closed, simple type over $\Omega$.
+\end{lemma}
+\begin{proof}By induction, with ${\to}$-formation as the only applicable rule.\end{proof}
+In general, $\vdash t:T$ means that both $t$ and $T$ are closed;
+we may leave out $\vdash$ in such cases and simply write $t:T$.
+A $U$-\emph{context} is a context consisting entirely of $x:A$ with $A:U$.
+A \emph{subcontext} of $\Gamma$ is obtained by leaving out zero or more 
+type declarations from $\Gamma$.
+\begin{lemma}\label{Ucontext}
+If $\Gamma\vdash M:A$ and $A:U$, then $\Gamma$ has a subcontext $\GamU$
+which is a $U$-context such that  $\GamU\vdash M:A$.
+\end{lemma}
+\begin{proof}By induction on type derivation.\end{proof}
+
+\subsection{Example}
+We define 
+\[
+\top:=\bot\to\bot \quad\quad I := \lambda x.\,x \quad\quad
+F:=\lambda x.\,\top\to x \quad\quad H :=\lambda h.\,h\,\top
+\] 
+for which one easily verifies (note the two typings for the raw term $I$):
+\[
+\vdash \top:\Omega\quad\quad
+\vdash I:\top \quad\quad
+\vdash F:\Omega\to\Omega \quad\quad
+\vdash I:\Omega\to\Omega \quad\quad
+\vdash H:(\Omega\to\Omega)\to\Omega
+\]
+We shall prove that $\vdash t: F =_{\Omega\to\Omega} I$ and 
+$\vdash t': HF =_\Omega HI$ for certain $t,t'$ containing
+$\Ref,\ext,\univ,{}^+,{}^-$. After having introduced reduction rules
+for these constants in the next section, we study the computational
+behaviour of these proofs of such extensional equalities.
+
+We use a context that is easily verified to be well-typed:
+\[
+x:\Omega, y:\Omega, e: x =_\Omega y \vdash\quad\quad
+\]
+and infer in this context:
+\[
+\begin{array}{lcl}
+x:\Omega, y:\Omega, e: x =_\Omega y \vdash {\lambda p.\,{e^+\,(p\,I)}}:{(\top\to x)\to y}\\
+x:\Omega, y:\Omega, e: x =_\Omega y \vdash {\lambda m.\,\lambda n.\,{e^-\,m}}:{y \to(\top\to x)}
+\end{array}
+\]
+
+Now, weak univalence gives (omitting subscripts of $\univ$): 
+\[
+x:\Omega, y:\Omega, e: x =_\Omega y  \vdash \univ({\lambda p.\,{e^+\,(p\,I)}},{\lambda m.\,\lambda n.\,{e^-\,m}}) : (\top\to x) =_\Omega y
+\]
+and hence by the easy conversions $F\,x = \top\to x$ and $I\,y = y$:
+\[
+x:\Omega,y:\Omega,e: x=_\Omega y \vdash 
+\univ(\lambda p.\,{e^+\,(p\,I)},\lambda m.\,\lambda n.\,e^-\,m) : F\,x =_\Omega I\,y
+\]
+
+Hence by extensionality (omitting subscripts of $\ext$):
+\[
+\vdash \ext\,(\lambda xye.\,\univ({\lambda p.\,{e^+\,(p\,I)}},{\lambda m.\,\lambda n.\,{e^-\,m}}): F =_{\Omega\to\Omega} I
+\]
+
+Defining the term 
+$P:=\lambda xye.\,\univ({\lambda p.\,{e^+\,(p\,I)}},{\lambda m.\,\lambda n.\,{e^-\,m}})$, one easily infers:
+\[
+\infer{\vdash ((\Ref~H) (\ext~P))^-: \top \to (\top\to \top)}
+{\infer{\vdash (\Ref~H) (\ext~P): (\top\to \top) =_\Omega \top}
+{\infer{\vdash (\Ref~H) (\ext~P) : H\,F =_\Omega H\,I}
+{\infer{\vdash \Ref~H : H =_{(\Omega\to\Omega)\to\Omega} H}
+{\vdash H: (\Omega\to\Omega)\to\Omega}\quad\quad \vdash \ext~P : F =_{\Omega\to\Omega} I}}}
+\]
+
+We would like to see how one can compute with the term $((\Ref~H) (\ext~P))$ 
+containing $\Ref,\univ,\ext,{}^+,{}^-$. 
+We do not denote empty term environments (since they `do nothing'). 
+Note that any constant $c$ in any path environment reduces to a path $\Ref\,c$;
+we apply this reduction for $c=\top$.
+\[
+\begin{array}{lcl}
+(\Ref~(\lam{h}{h\,\top}))(\ext~P)&\to
+&(\mbox{by the rule for $\Ref$})\\
+({h\,\top})\pbr{h{=}\ext~P}        &\to
+&(\mbox{distributing $\pbr{h{=}\ext~P}$ over $h\,\top$})\\
+(h\pbr{h=\ext~P})\,(\top\pbr{h{=}\ext~P})   &\to
+&(\mbox{by the rule for variable $h$})\\
+(\ext~P)\,(\top\pbr{h{=}\ext~P})   &\to
+&(\mbox{by the rule for path substition in $\top$})\\
+(\ext~P)\,(\Ref\,\top)          &\to
+&(\mbox{by the rules for $\ext$, after unfolding $P$})\\
+(\univ_{(\top{\to}x)y}({\lambda p.\,{e^+\,(p\,I)}},{\lambda m.\,\lambda n.\,{e^-\,m}}))\rho&
+&\mbox{with $\rho= (x{=}\top,y{=}\top,e{=}\Ref\,\top)$}\\
+                              &\to
+&(\mbox{by the rules for value environments})\\
+\univ_{(\top{\to}\top)\top}((\lambda p.\,{e^+\,(p\,I)})\rho_e,
+(\lambda m.\,\lambda n.\,{e^-\,m})\rho_e)&
+&\mbox{a canonical form (with $\rho_e = (e{=}\Ref\,\top)$)}
+\end{array}
+\]
+The latter closure is canonical since the variable $e$ occurs under lambda abstraction.
+
+In a similar way we can reduce $(\Ref~(\lam{h}{h\,\top}))(\ext~P)^-$ to
+$(\lambda m.\,\lambda n.\,{e^-\,m})(e{=}\Ref\,\top)$ of type $\top\to (\top\to \top)$,
+again a canonical form. If we apply the latter term to values $u,v: \top$ we get:
+\[
+\begin{array}{lcl}
+(\lambda m.\,\lambda n.\,{e^-\,m})(e{=}\Ref\,\top)\,u\,v &\to
+&(\mbox{reducing closures twice})\\
+(e^-\,m)(e{=}\Ref\,\top,m{=}u,n{=}v)                   &\to
+&(\mbox{by the rules for value environments})\\
+(\Ref\,\top)^-\,u                                        &\to
+&(\mbox{by the rule $(\Ref\,\varphi)^- \to \lambda z.\,z$})\\
+(\lambda z.\,z) u          &\to&
+z(z{=}u) \to\\ u
+\end{array}
+\]
+Note that $u$ and not $v$ is the right one, consider $H=\lambda h.\,h\,\bot,~\bot\to\top\to\bot$.
+
+\section{Operational Semantics}
+
+The operational semantics is modelled as a rewrite system for closures,
+following Curien~\ref{CurienTCS91}. The rewrite rules are given in
+Figure~\ref{value_closure_rules},\ref{path_closure_rules},\ref{constant_rules}.
+
+\medskip
+
+\emph{Closed} closures are defined as $M\rho$ with $\rho$ 
+consisting of closed closures and for every occurrence of a De Bruijn index $i$
+in $M$ we have:
+\[
+i - \text{the number of $\lambda$'s on the path from $i$ to the root of $M$} < 
+\text{the length of $\rho$}
+\]
+Similarly we define closed closures $M\alpha$ for path environments.
+
+\begin{figure}[h]
+\[
+c\rho \red c\quad\quad
+i\rho \red \rho_i\quad\quad
+(\lambda\,b)\rho~u \red b(\rho,u)\quad\quad
+(c~a)\rho ~\red~ (c\rho)~(a\rho)
+\]
+\[
+(\Ref\,v)\rho \red \Ref (v\rho)\quad\quad
+(\extfs\,e)\,\rho \red \ext_{(f_0\rho)(f_1\rho)} (e\,\rho)\quad\quad
+\unphsi(p,q)\rho \red \univ_{(\varphi\rho)(\psi\rho)}(p\rho,q\rho)\quad\quad
+\]
+\[
+e^+\rho \red (e\rho)^+\quad\quad
+e^-\rho \red (e\rho)^-\quad\quad
+(\varphi\to\psi)\rho \red (\varphi\rho\to\psi\rho)
+\]
+
+\caption{Computation rules for value environments (with name-free variables).
+\label{value_closure_rules}}
+\end{figure}
+
+\begin{figure}[h]
+\[
+c\alpha \red \Ref\,c\quad\quad
+i\alpha \red \alpha_i\quad\quad
+(\lambda\,b)\alpha~\omega \red b(\alpha,\omega)\quad\quad
+(c~a)\alpha \red (c\alpha)~(a\alpha)
+\]
+\[
+(\varphi\to\psi)\sigma \red (\varphi\sigma\to\psi\sigma)
+\]
+
+\caption{Computation rules for path environments (with name-free variables).
+\label{path_closure_rules}}
+\end{figure}
+
+\begin{figure}[h]
+\[
+(\Ref\,f)\,(\Ref\,v) \red \Ref (f\,v)\quad\quad
+\Ref ((\lambda\,b)\rho)~\omega \red b(\Ref\rho,\omega)~\mbox{($\omega$ canonical and non-degenerated)}
+\]
+\[
+(\extfs\,(\lambda\lambda\lambda\,b)\rho)\,(\Ref\,u) \red b (\rho,u,u,\Ref\,u)\quad
+(\extfs\,(\lambda\lambda\lambda\,b)\rho)\,(\extas\,c) \red b (\rho,a_0,a_1,\extas\,c)
+\]
+\[
+(\extfs\,(\lambda\lambda\lambda\,b)\rho)\,(\unphsi(p,q)) \red b (\rho,\varphi,\psi,\unphsi(p,q))
+\]
+\[
+(\Ref\,\varphi)^+ \red \lambda 0\quad\quad
+(\Ref\,\varphi)^- \red \lambda 0\quad\quad
+\univ(p,q)^+ \red p\quad\quad
+\univ(p,q)^- \red q
+\]
+\[
+(\Ref\,\varphi\to\Ref\,\psi) \red \Ref(\varphi{\to}\psi)
+\]
+\[
+(\Ref\,\zeta\to\unphsi(r,s)) \red
+  \univ_{(\zeta{\to}\varphi)(\zeta{\to}\psi)}(\lambda fx.\,r(fx)(),\lambda gy.\,s(gy)())
+\]
+\[
+(\unphsi(p,q)\to\Ref\,\zeta) \red
+  \univ_{(\varphi{\to}\zeta)(\psi{\to}\zeta)}(\lambda fx.\,f(qx)(),\lambda gy.\,g(py)())
+\]
+\[
+(\unphis(p,q)\to\unpsis(r,s)) \red
+  \univ_{(\varphi_0{\to}\psi_0)(\varphi_1{\to}\psi_1)}(\lambda fx.\,r(f(qx))(),\lambda gy.\,s(g(py))())
+\]
+
+\caption{Computation rules for the new constants (with name-free variables).
+\label{constant_rules}}
+\end{figure}
+
+\begin{definition}\label{rewrite_relation}
+The rewrite relation for closures is defined as the smallest relation satisfying
+the rewrite rules given in
+Figure~\ref{value_closure_rules},\ref{path_closure_rules},\ref{constant_rules}
+and closed under the rules
+\[
+\infer{M(u_1,\ldots,u_i,\ldots,u_n) \red M(u_1,\ldots,v,\ldots,u_n)}{u_i \red v}\quad\quad
+\infer{u\,v \red u\,v'}{v \red v'}\quad\quad
+\infer{u\,v \red u'\,v}{u \red u'}
+\]
+We denote the transitive reflexive closure of $\to$ by$\rtr$.
+If a closure cannot be reduced it is called irreducible, or \emph{normal}.
+The same terminology will be used for terms, as they can always be viewed
+as closures in the empty environment.
+We extend $\to$ to environments by $\rho\red\rho(x=u)$ if $\rho(x)\red u$. 
+Similarly for path environments $\sigma$.
+\end{definition}
+
+\begin{lemma}[Canonicity]\label{lem:canonicity}
+For closed and irreducible $A,\varphi,e,t$ we have:
+\begin{enumerate}
+\item If $A:U$, then $A$ is a simple type over $\Omega$.
+\item If $\varphi:\Omega$, then $\varphi$ is a simple type over $\bot$.
+\item If $e:t_0 =_\Omega t_1$, then $e$ is of the form $(\Ref\_)$ or $\univ_\_(\_,\_)$.
+\item If $e:t_0 =_{A{\to}B} t_1$, then $e$ is of the form $(\Ref\_)$ or $(\ext_\_\,\_)$.
+\item If $t:{A\to B}:u$ with $u\in\set{\Omega,U}$, then $t$ is of the form $(\lam{x}{\_})$.
+\end{enumerate}
+\end{lemma}
+\begin{proof} By simultaneous induction on type derivation,
+calling the induction hypothesis IH.
+
+1. This is Lemma~\ref{UtypesOmegasimple}.
+
+2. Obvious for $\bot:\Omega$ and by induction for $\varphi\to\psi:\Omega$.
+The case $f\,a :\Omega$ holds vacuously since $f\,a$ is reducible by IH.
+
+3. Obvious for $\Ref\,t : t =_\Omega t$ and $\unphsi(p,q): \varphi =_\Omega \psi$
+and by induction in the case of the weak conversion rule.
+The case $p\,e: f_0\,a_0 =_B f_1\,a_1$ holds vacuously, since applying the IH to 
+$p$ and $e$ yields four possibilities which are all reducible per definition
+of the rules.
+
+4. By a similar argument as under 3, with $\ext$ instead of $\univ$.
+
+5. Obvious in case of the rule for $\lambda$-abstraction. 
+The case $f\,a :B$ holds vacuously since $f\,a$ is reducible by IH.
+The same holds for the cases $e^+ : \varphi\to\psi$ and $e^- : \psi\to\varphi$.
+\end{proof}
+
+\subsection{Confluence}\label{sec:confluence}
+
+\begin{theorem}\label{confluence}
+We have \emph{confluence}, both for value and for path closures:
+if $u\rtr v$ and $u\rtr v'$, then $v\rtr u'$ and $v'\rtr u'$ for some $u'$;\quad
+if $\omega\rtr \mu$ and $\omega\rtr \mu'$, 
+then $\mu\rtr \omega'$ and $\mu'\rtr \omega'$ for some $\omega'$.
+\end{theorem}
+\begin{proof}{\bf To be done, no difficulty expected.}\end{proof}
+As a consequence of confluence we have uniqueness of normal forms.
+More precisely: if a closure reduces to a normal form, then this normal
+form is unique.
+
+\subsection{Strong normalization}\label{sec:SN}
+In this section we prove strong normalization by a variation of Tait's
+computability argument \cite{xx}. 
+
+\begin{definition}\label{accessible}
+\emph{Accessibility} of closures with respect to $\to$ is inductively defined
+by: $u$ is $\to$-accessible if every $v$ with $u\red v$ is $\to$-accessible.
+We say that $\to$ is \emph{strongly normalizing} if every closure is $\to$-accessible.
+The set of strongly normalizing closures of type $T$ will be denoted by $SN(T)$.
+Analogously, $\rho\in\SN$ expresses that $\rho$ is strongly normalizing.
+Similarly for path environments. 
+\end{definition}
+
+By induction on the type $T$ we define
+sets $C(T) \subseteq \SN(T)$ of \emph{computable} closures.
+The induction is subtle: $C$ for $=_{A{\to}B}$ depends on $C$ for $A{\to}B,=_A,=_B$
+and $C(A{\to}B)$ depends on $C$ for $A,B,=_A,=_B$.
+
+
+\begin{itemize}
+\item $C(U) = \set{A \mid \text{$A$ is a simple type over $\Omega$}}$
+\item $C(\Omega) = \set{u\in SN(\Omega) \mid u \rtr T
+~\text{where $T$ is a simple type over $\bot$}}$
+\item $C(\bot) = \set{u\in SN(\bot) \mid u \rtr \foo}$ 
+($\foo$ is a default closure of the empty type $\bot$)
+\item $C(\varphi\to\psi) = \set{u\in SN(\varphi\to\psi) \mid u \rtr (\lambda\,b)\rho 
+~\text{and}~ \forall v\in C(\varphi).\,b(\rho,v) \in C(\psi)}\quad(\varphi,\psi \in C(\Omega))$
+\item $C(A{\to}B) = \set{u\in SN(A{\to}B) \mid u \rtr (\lambda\,b)\rho \quad
+\text{satisfying 1 and 2 below}}\quad(A,B \in C(U))$
+  \begin{enumerate}
+  \item $\forall u\in C(A).\,b(\rho,u) \in C(B)$
+  \item $\forall \omega\in C(u_0 =_A u_1).\,b(\Ref\,\rho,\omega) 
+        \in C(b(\rho,u_0) =_B b(\rho,u_1))$
+  \end{enumerate}
+\item $C(\varphi =_\Omega \psi) = \set{\omega\in SN(\varphi =_\Omega \psi) \mid 
+\text{one of $(\Omega1),(\Omega2)$ holds}}\quad(\varphi,\psi \in C(\Omega))$ 
+  \begin{enumerate}
+  \item[$(\Omega1)$] $\omega \rtr \Ref\,\varphi$ and $\varphi =  \psi$
+  \item[$(\Omega2)$] $\omega \rtr \unphsi\,(p,q)$ and $p\in C(\varphi\to\psi)$, $q\in C(\psi\to\varphi)$
+  \end{enumerate}
+\item $C(f_0 =_{A{\to}B} f_1) = \set{\omega\in SN(f_0 =_{A{\to}B} f_1) \mid 
+\text{one of $({\to}1),({\to}2)$ holds}}\quad(f_0,f_1 \in C(A{\to}B))$
+  \begin{enumerate}
+  \item[$({\to}1)$] $\omega \rtr \Ref\,f_0$ and $f_0 = f_1$
+  \item[$({\to}2)$] $\omega \rtr \extfs\,(\lambda\lambda\lambda\,b)\rho$ and
+      $\forall\mu\in C(u_0 =_A u_1).\,b(\rho,u_0,u_1,\mu) \in C(f_0 u_0 =_B f_1 u_1)$
+  \end{enumerate}
+\end{itemize}
+
+We observe that the sets $C(T)$ are closed under reduction and
+under expansion (inverse reduction) to a term in $\SN(T)$.
+Equality types are dependent types: they depend on their left- and right-hand side.
+The sets $C(a_0 =_A a_1)$ are ({\bf should be}) invariant under reduction and expansion
+of the $a_i$. ({\bf This depends on the precise definition of $=_w$}).
+
+\begin{definition}\label{Gammaenvironment}
+By induction we define a $\Gamma$-\emph{environment} for any legal context $\Gamma$:
+$\rho$ is a ()-environment if $\rho\in\SN$, and $\rho$ is a $(\Gamma,x:T)$-{environment}
+if $\rho$ is a $\Gamma$-{environment} and $\rho(x)\in C(T\rho)$.
+
+For paths we only care about the variables with type $A:U$, namely:
+$\sigma$ is a ()-environment if $\sigma\in\SN$, and $\sigma$ is a $(\Gamma,x:A)$-{environment}
+if $\sigma$ is a $\Gamma$-{environment} and $\sigma(x)\in C(a_0  =_A a_1)$ 
+for some $a_i\in C(A)$, if $A:U$. 
+(By definition, $\Gamma$-{environments} are $\SN$.)
+
+Given a (value) environment $\rho$ we define the path environment 
+$\Ref\,\rho$ recursively by $\Ref\,()=()$ and $\Ref\,(\rho,u)=(\Ref\,\rho,\Ref\,u)$. 
+Given a path environment $\sigma$ we define the value environments
+$\sigma_i$ recursively by $()_i=()$ and 
+$(\sigma,\omega)_i=(\sigma_i,u_i)$ when $\omega\in C(u_0  =_A u_1)$.
+In words, $\sigma_i$ collects the points of the paths in $\sigma$.
+\end{definition}
+
+We will often (and sometimes implicitly) use the following lemmas.
+
+\begin{lemma}\label{refGammaenv}
+For any context $\Gamma\vdash$,
+if $\rho$ is a $\Gamma$-environment,
+then $\Ref\,\rho$ is a $\Gamma$-environment of paths.
+\end{lemma}
+\begin{proof} Follows from: if $v\in C(A)$, then $\Ref\,v\in C(v =_A v)$, for all $A:U$.
+\end{proof}
+
+\begin{lemma}\label{accindplus}
+If $u,v\in\SN$ and every reduct of $uv$ that is not obtained by a reduction
+of $u$ or of $v$ is $\SN$, then $uv\in\SN$.
+\end{lemma}
+\begin{proof} By accessibility induction. \end{proof}
+
+\begin{theorem}\label{typesoundness}
+We have \emph{type soundness}, both on the value and on the path level:
+\begin{enumerate}
+\item If $\Gamma\vdash M:T$ and $\rho$ is a $\Gamma$-environment, then $M\rho\in C(T\rho)$.
+\item If $\Gamma\vdash M:T:U$ and $\sigma$ is a $\Gamma$-environment, 
+then $M\sigma\in C(M \sigma_0 =_T M \sigma_1)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By induction on type derivation.
+IH(n) stands for the induction hypothesis for part n of the theorem.
+Let $\rho,\sigma$ be $\Gamma$-correct.
+
+For $\Gamma\vdash\Omega:U$ the result is obvious.
+
+If $\Gamma\vdash {A}\to{B} :U$  by $\Gamma\vdash A:U$ and $\Gamma\vdash B:U$,
+then by IH(1) we have $A,B\in C(U)$ and hence $A{\to}B\in C(U)$.
+Environments do not play a role here, since the types in $U$ are closed.
+Part (2) is N/A.
+
+If $\Gamma\vdash {A}\to{B} :\Omega$  by $\Gamma\vdash A:\Omega$ and $\Gamma\vdash B:\Omega$,
+then by IH(1) we have $A\rho,B\rho\in C(\Omega)$. Clearly, $(A{\to}B)\rho \red (A\rho{\to}B\rho)$ 
+reduces to a simple type over $\bot$, so it remains to prove that $(A{\to}B)\rho\in\SN(\Omega)$.
+This follows by accessibility induction on $A\rho,B\rho\in \SN(\Omega)$.
+By IH(2) we have $A\sigma\in C(A\sigma_0 =_\Omega A\sigma_1)$, 
+$B\sigma\in C(B\sigma_0 =_\Omega B\sigma_1)$. Now there are four possibilities:
+\begin{itemize}
+\item $A\sigma \rtr \Ref\,\varphi$ and $B\sigma \rtr \Ref\,\psi$,
+then $(A\sigma{\to}B\sigma) \rtr (\Ref\,\varphi{\to}\Ref\,\psi) \red \Ref(\varphi{\to}\psi)$
+\item $A\sigma \rtr \Ref\,\zeta$   and $B\sigma \rtr \unphsi(r,s)$, then 
+\[(A\sigma{\to}B\sigma) \rtr  
+\univ_{(\zeta{\to}\varphi)(\zeta{\to}\psi)}(\lambda fx.\,r(fx),\lambda gy.\,s(gy))
+\]
+\item $A\sigma \rtr \unphsi(p,q)$  and $B\sigma \rtr \Ref\,\zeta$, then 
+\[(A\sigma{\to}B\sigma) \rtr  
+\univ_{(\varphi{\to}\zeta)(\psi{\to}\zeta)}(\lambda fx.\,f(qx),\lambda gy.\,g(py))
+\]
+\item $A\sigma \rtr \unphis(p,q)$  and $B\sigma \rtr \unpsis(r,s)$, then 
+\[(A\sigma{\to}B\sigma) \rtr  
+\univ_{(\varphi_0{\to}\psi_0)(\varphi_1{\to}\psi_1)}(\lambda fx.\,r(f(qx)),\lambda gy.\,s(g(py)))
+\]
+\end{itemize}
+We have to show that $(A{\to}B)\sigma\in C((A{\to}B)\sigma_0 =_\Omega (A{\to}B)\sigma_1)$
+in each of the four cases. In the first case we have that $A\sigma_i = \varphi$ and
+$B\sigma_i = \psi$ and therefore $(A{\to}B)\sigma_i = \varphi{\to}\psi$.
+In the second case we have that $A\sigma_i = \zeta$ and
+$B\sigma_0 = \varphi$, $B\sigma_1 = \psi$, and therefore 
+$(A{\to}B)\sigma_0 = \zeta{\to}\varphi$,
+$(A{\to}B)\sigma_1 = \zeta{\to}\psi$.
+Moreover, we have $r\in C(\varphi\to\psi)$ and hence 
+$\lambda fx.\,r(fx)\in C((\zeta{\to}\varphi)\to(\zeta{\to}\psi))$,
+since simple lambda terms preserve computability.
+Similar observations can be made for the third and the fourth case.
+It remains to verify that all arguments (and subscripts)
+of $\Ref$ and $\univ$ are computable,
+and to prove that $(A{\to}B)\sigma\in\SN(\Omega)$. 
+The latter follows by IH(2) and accessibility induction.
+
+If $\Gamma\vdash x:A$ by $(x:A)\in\Gamma$, then we have $\rho(x)\in C(A\rho)$
+and $\sigma(x)\in C(M \sigma_0  =_A M \sigma_1 )$ if $A:U$. 
+By expansion it suffices for $x\rho\in C(A\rho)$
+and $x\sigma\in C(M \sigma_0  =_A M \sigma_1 )$ 
+that $x\rho$ and $x\sigma$ are $\SN$. The reducts of
+$x\rho$ are $\rho(x)$ and $x\rho'$ with $\rho\to\rho'$, 
+so $x\rho$ is $\SN$ by accessibility induction. 
+In the same way one shows that $x\sigma$ is $\SN$.
+
+If $\Gamma\vdash\lam{x}{b}:A{\to}B$ by 
+$\Gamma,x:A\vdash b:B$, $\Gamma \vdash A:U$, and $\Gamma \vdash B:U$,
+then by IH(1) we have that $A,B$ are simple types over $\Omega$ and
+for any $v\in C(A)$ we have, as $\rho(x{=}v)$ is a $(\Gamma,x:A)$-environment, 
+that $b\rho(x{=}v)\in C(B)$. Moreover, for any $\omega\in C(u_0 =_A u_1)$,
+as $(\Ref\,\rho)(x{=}\omega)$ is a $(\Gamma,x:A)$-environment,
+by IH(2) we get $b(\Ref\,\rho)(x{=}\omega)\in C(b\rho(x{=}u_0) =_B b\rho(x{=}u_1))$.
+(Here we have used that the endpoints of $\Ref\,\rho$ are 
+given by $\rho$ and those of $\omega$ are $u_i$.)
+It remains to prove $(\lam{x}{b})\rho\in\SN(A{\to}B)$.
+This follows by accessibility induction on $b\rho(x{=}v)\in \SN(B)$,
+where a crucial observation is that $C(A)$ is not empty.
+%This proves $(\lam{x}{b})\rho\in C(A{\to}B)$.
+
+If $\Gamma\vdash\lam{x}{b}:\varphi{\to}\psi$ by 
+$\Gamma,x:\varphi\vdash b:\psi$, $\Gamma \vdash \varphi:\Omega$, 
+and $\Gamma \vdash \psi:\Omega$,
+then by IH(1) we have that $\varphi\rho,\psi\rho\in\SN(\Omega)$ 
+reduce to simple types over $\bot$ and for any $u\in C(\varphi\rho)$ we have, 
+as $\rho(x{=}u)$ is a $(\Gamma,x:\varphi)$-environment,
+that $b\rho(x{=}u)\in C(\psi\rho)$. 
+It remains to prove that $(\lam{x}{b})\rho\in\SN((\varphi{\to}\psi)\rho)$.
+This follows by accessibility induction on $b\rho(x{=}v)\in \SN(\psi\rho)$,
+where a crucial observation is that $C(\varphi\rho)$ is not empty.
+This proves $(\lam{x}{b})\rho\in C((\varphi{\to}\psi)\rho)$.
+Part 2 of the theorem does not apply in this case of $\Omega:U$.
+
+If $\Gamma\vdash f\,a:B$ by $\Gamma\vdash f:A{\to}B$ and $\Gamma\vdash a:A$,
+there are two cases, $A{\to}B:U$ and $A{\to}B:\Omega$.
+In the case $U$ we have by IH(1) that $f\rho\in C(A{\to}B)$ 
+and $a\rho\in C(A)$. It follows that 
+$f\rho\red(\lam{x}{b})\rho'$ for some $\rho'$, 
+and for all $u\in C(A)$ we have $b\rho'(x{=}u) \in C(B)$. 
+Hence $(f\,a)\rho \red (f\rho)\,(a\rho) \rtr b\rho'(x{=}a\rho) \in C(B)$.
+By expansion it suffices for $(f\,a)\rho\in C(A{\to}B)$ to show that 
+$(f\,a)\rho$ is $\SN$, which follows by Lemma~\ref{accindplus}.
+This proves part 1.
+By IH(2) we get $f\sigma\in C(f\sigma_0  =_{A{\to}B} f\sigma_1 )$ 
+and $a\sigma\in C(a\sigma_0  =_A a\sigma_1 )$. 
+There are now two possibilities:
+\begin{enumerate}
+  \item[(1)] $f\sigma \rtr \Ref\,(f\sigma_i )$ and $f\sigma_i \in C(A{\to}B)$
+  \item[(2)] $f\sigma \rtr \extfs\,(\lambda\lambda\lambda\,b)\rho$ with
+  $f\sigma_i  = f_i \in C(A{\to}B)$ and 
+  \[\forall\mu\in C(u_0 =_A u_1).\,b(\rho,u_0,u_1,\mu) \in C(f_0 u_0 =_B f_1 u_1).\]
+\end{enumerate}
+The first case corresponds to $({\to}1)$ and is the most delicate case.
+{\bf (Thierry's idea at work!)}
+We must prove $(f\,a)\sigma\in C((f\,a)\sigma_0 =_B (f\,a)\sigma_1)$.
+We have $a\sigma\in C(a\sigma_0  =_A a\sigma_1 )$, so in particular $a\sigma\in\SN$.
+Before we can decide on the outermost reduction in $(f\sigma)\,(a\sigma)$
+we must know whether $a\sigma$ is of the form $(\Ref\,\_)$ or not.
+To this end we normalize $a\sigma$ and use that $a\sigma\in C(a\sigma_0  =_A a\sigma_1 )$.
+If $A=\Omega$, then the normal form is either $(\Ref\_)$ or $\univ_\_(\_,\_)$.
+If $A\not=\Omega$, then the normal form is either $(\Ref\_)$ or $(\ext_\_\,\_)$.
+Hence we have the following three possibilities:
+\begin{enumerate}
+  \item[(a)] $a\sigma \rtr \Ref\,t$ with  $t = (a\sigma_i )\in C(A)$;
+  \item[(b)] $a\sigma \rtr \unphis(p,q)\in C(\varphi_0 =_\Omega \varphi_1)$ with 
+  $\varphi_i = a\sigma_i \in C(\Omega)$,
+%$\psi = d_1 a\sigma\in C(\Omega)$, $p\in C(\varphi\to\psi)$, $q\in C(\psi\to\varphi)$;
+  \item[(c)] $a\sigma \rtr \extas\,(\lambda\lambda\lambda\,c)\rho \in C(a_0 =_A a_1)$
+     with $(a\sigma_i ) = a_i \in C(A)$
+%  \[\forall\mu\in C(u_0 =_A u_1).\,b(\rho,u_0,u_1,\mu) \in C(f_0 u_0 =_B f_1 u_1).\]
+\end{enumerate}
+In case (1a) we have $f\sigma\,(a\sigma)\rtr\Ref\,(f\sigma_i \,t)\in C(\_ =_B \_)$.
+For the cases (1b,c) we note that $f\sigma_i  \rtr (\lambda\,d)\rho \in C(A{\to}B)$.
+In case (1b) we have
+$f\sigma\,(a\sigma)\rtr d(\Ref\,\rho,\Ref\,t)\in C(\_ =_B \_)$ 
+and in case (1c) we have
+$f\sigma\,(a\sigma)\rtr d(\Ref\,\rho,\univ_\_(\_,\_))\in C(\_ =_B \_)$,
+both by the second clause in the definition of $C(A{\to}B)$.
+The cases (2a,b,c) can be treated uniformly and we get 
+$f\sigma\,(a\sigma)\rtr b(\rho,a\sigma_0 ,a\sigma_1 ,a\sigma)\in C(\_ =_B \_)$
+by the clause in (2). By expansion, it remains to show that $f\sigma\,(a\sigma)$
+is $\SN$. This follows by by Lemma~\ref{accindplus} and completes the proof of part 2.
+
+If $\Gamma\vdash f\,a:B$ by $\Gamma\vdash f:A{\to}B$ and $\Gamma\vdash a:A$,
+and $A{\to}B:\Omega$, then part 2 of the theorem does not apply.
+Part 1 is proved in the same way as above, with $A{\to}B:U$.
+
+The case $\Gamma\vdash \bot:\Omega$ is obvious.
+
+If $\Gamma\vdash\Ref\,a: a =_A a$ by $\Gamma\vdash A:U$ and $\Gamma\vdash a:A$,
+then part 2 does not apply. By IH(1) we have $a\rho\in C(A\rho)$, so $a\rho$ is $\SN$.
+We immediately get $\Ref\,a\rho : a\rho =_A a\rho$, as $(\Ref\,a\rho)$ is also $\SN$.
+
+If $\Gamma\vdash\unphsi(p,q):\varphi =_\Omega \psi$ by 
+$\Gamma\vdash \varphi,\psi:\Omega$ and 
+$\Gamma\vdash p:\varphi\to\psi$ and
+$\Gamma\vdash q:\psi\to\varphi$,
+then part 2 does not apply. 
+By IH(1) we have $\varphi\rho,\psi\rho\in C(\Omega)$,
+$p\rho\in C((\varphi\to\psi)\rho)$,
+$q\rho\in C((\psi\to\varphi)\rho)$,
+and hence all are $\SN$. This gives
+$\unphsi(p,q)\rho\in C(\varphi\rho =_\Omega \psi\rho)$
+by $(\Omega2)$.
+
+If $\Gamma\vdash \extfs\,(\lambda\,x_0 x_1 e.\,t): f_0 =_{A\to B} f_1$
+by $\Gamma\vdash f_0: A\to B$ and $\Gamma\vdash f_1: A\to B$
+and $\Gamma,x_0:A,x_1:A,e: x_0 =_A x_1 \vdash t: f_0 x_0 =_B f_1 x_1$,
+then part 2 does not apply. 
+By IH(1) we have $f_i\rho\in C({A\to B})$ and for 
+all $u_i\in C(A),~\mu\in C(u_0 =_A u_1)$, as $(\rho,u_0,u_1,\mu)$ is
+$\Gamma,x_0:A,x_1:A,e: x_0 =_A x_1$-correct, 
+$t(\rho,u_0,u_1,\mu) \in C(f_0\rho\,u_0 =_B f_1\rho\,u_1)$.
+This is exactly the condition $({\to}2)$, and since $t$ is $\SN$
+it follows that $(\extfs\,(\lambda\,x_0 x_1 e.\,t))\rho: f_0\rho=_{A\to B} f_1\rho$.
+
+If $\Gamma\vdash p\,e: f_0\,a_0 =_B f_1\,a_1$ by 
+$\Gamma\vdash p: f_0 =_{A\to B} f_1$ and $\Gamma\vdash e : a_0 =_A a_1$,
+then part 2 does not apply.
+The proof of part 1 in this case is very much similar to 
+the proof of part 2 in the case of $f\,a : B$ by $f: A\to B : U$ and $a:A$. 
+For the sake of completeness we go through it once more, taking bigger steps.
+We must prove $(p\,e)\rho\in C((f_0\,a_0)\rho\sigma =_B (f_1\,a_1)\rho)$.
+By IH(1) we get $p\rho\in C(f_0\rho =_{A\to B} f_1\rho)$
+and $e\rho\in C(a_0\rho =_{A} a_1\rho)$.
+There are two possibilities for $p\rho$:
+\begin{enumerate}
+  \item[$(1)$] $p\rho \rtr \Ref\,f_i\rho$
+  \item[$(2)$] $p\rho \rtr \ext_{(f_0\rho)(f_1\rho)}\,(\lambda\lambda\lambda\,b)\rho'$ and 
+  $\forall\mu\in C(u_0 =_A u_1).\,b(\rho',u_0,u_1,\mu) \in C(f_0\rho u_0 =_B f_1\rho u_1).$
+\end{enumerate}
+and three possibilities for $e\rho$:
+\begin{enumerate}
+  \item[(a)] $e\rho \rtr \Ref\,a_i\rho$ 
+  \item[(b)] $e\rho \rtr \unphis(p,q)\in C(\varphi_0 =_\Omega \varphi_1)$ with $\varphi_i = a_i\rho$,
+  \item[(c)] $e\rho \rtr \extas\,(\lambda\lambda\lambda\,c)\rho'' \in C(a_0\rho =_A a_1\rho)$
+\end{enumerate}
+The latter case distinction determines the outermost reduction in $(p\rho)\,(e\rho)$
+in case (1). In all cases we get that $(p\rho)\,(e\rho)$ reduces to a closure in 
+$C((f_0\,a_0)\rho\sigma =_B (f_1\,a_1)\rho)$.
+By expansion, it remains to show that $p\rho\,(e\rho)$
+is $\SN$. This follows by by Lemma~\ref{accindplus}.
+
+If $\Gamma\vdash e^+: \varphi\to\psi$ and $\Gamma\vdash e^-: \psi\to\varphi$
+by $\Gamma\vdash e: \varphi =_{\Omega} \psi$, then part 2 does not apply. 
+By IH(1) we have $e\rho\in C((\varphi =_{\Omega} \psi)\rho)$.
+There are by definition two possibilities for $e\rho$:
+\begin{enumerate}
+  \item[$(\Omega1)$] $e\rho \rtr \Ref\,\varphi\rho$ with  $\varphi\rho = \psi\rho \in C(\Omega)$;
+  \item[$(\Omega2)$] $e\rho \rtr (\unphsi(p,q))\rho$ with
+                   $p\rho\in C((\varphi\to\psi)\rho)$ and $q\rho\in C((\psi\to\varphi)\rho)$
+\end{enumerate}
+In case $(\Omega1)$, $e^+\rho,e^-\rho$ both reduce to $\lambda x.\,x \in C((\varphi\to\varphi)\rho)$.
+In case $(\Omega2)$, $e^+\rho$ reduces to $p \in C((\varphi\to\psi)\rho)$
+and $e^-\rho$ reduces to $q \in C((\psi\to\varphi)\rho)$.
+By expansion, as $e^+\rho,e^-\rho$ are $\SN$, 
+we get $e^+\rho\in C((\varphi\to\psi)\rho)$
+and $e^-\rho\in C((\psi\to\varphi)\rho)$.
+
+If $\Gamma\vdash p: t'_0 =_A t'_1$ by $\Gamma\vdash p: t_0 =_A t_1$, 
+$\Gamma\vdash t_i,t'_i:A$ and $t_i =_{w} t'_i$,
+then part 2 does not apply. By IH(1) we get $p\rho \in C(t_0\rho =_A t_1\rho)$, 
+$t_i\rho,t'_i\rho\in C(A)$. We have to prove $p\rho \in C(t'_0\rho =_A t'_1\rho)$.
+We get $p\rho \in SN(t'_0\rho =_A t'_1\rho)$ since $p\rho\in\SN$ has type
+$t'_0\rho =_A t'_1\rho$ (by applying the rule of weak conversion, 
+{\bf using $t_i\rho =_{w} t'_i\rho$}).
+There are two cases, $A=\Omega$ and $A\not=\Omega$, each with two subcases.
+In case $(\Omega1)$, we have $p\rho \red \Ref\,\varphi$ with $\varphi$,
+the common normal form of $t_i\rho$, {\bf which should then also be the common
+normal form of $t'_i\rho$}. The cases $(\Omega2),({\to}1),({\to}2)$ are very similar.
+{\bf This suggests we can take for $=_w$: having the same ${\to}$-normal form}.
+\end{proof}
+
+\section{Tentative: extension to existential quantification}\label{sec:exists}
+
+\begin{figure}[h]
+\[
+\infer{\Gamma\vdash \Sigma\,P : \Omega}{\Gamma\vdash P:\Omega\to\Omega}
+\quad\quad
+\infer{\Gamma\vdash (w,p):\Sigma\,P}{\Gamma\vdash P:\Omega\to\Omega\quad
+\Gamma\vdash w:\Omega\quad\Gamma\vdash p : P\,w}
+\]
+\[
+\infer{\Gamma\vdash \Ex\,\lam{x}{t}:(\Sigma\,P)\to Q}{\Gamma\vdash P:\Omega\to\Omega\quad
+\Gamma\vdash Q:\Omega\quad\Gamma,x:\Omega \vdash t : P\,x \to Q}
+\]
+\[
+\Ex\,(\lam{x}{t})\rho\,(w,p) \red t(\rho,w)\,p
+\]
+
+\caption{Introduction, elimination and reduction for existential quantification.
+\label{exists_rules}}
+\end{figure}
+
+%{\small\[\infer{a}{b}\]}
+\section{Unfinished: Henkin Models with Truncated Simplicial Sets}\label{Henkin_tss}
+A \emph{Henkin model} \cite{Henkin} consists of sets $\sbr{A}$
+for all types $A$ together with application mappings 
+$ap_{A,B}:\sbr{A\to B}\times\sbr{A}\to\sbr{B}$.
+The sets $\sbr{A\to B}$ need not be function spaces, but their elements
+are given applicative behaviour by the mappings $ap$ (we will often omit the
+type subscripts). Henkin formulated axioms of extensionality and proved
+completeness. This has become the standard approach to higher-order logic.
+(One could say this is a many-sorted first-order logic approach to
+higher-order logic, avoiding some of the essential difficulties of the
+latter.)
+
+A \emph{truncated simplicial set} (tss for short) consists of two sets
+$X_0,X_1$ with maps $d_0,d_1 : X_1\to X_0$ and $s:X_0\to X_1$
+such that $d_0(s(x)) = d_1(s(x)) = x$ for all $x\in X_0$. 
+We write $e:a\to a'$ if $e$ is in $X_1$ and $d_0(e) = v$ 
+and $d_1(e) = v'$. Thus a tss is a (multi)graph with source and target
+functions $d_0$ and $d_1$, respectively, also called face maps, and
+\emph{degeneracy} map $s$ mapping any vertex to its selfloop.
+Here elements of $X_0$ are to be thought of as \emph{values},
+and elements of $X_1$ as \emph{paths} between them, representing
+the (extensional) equality.
+
+In a tss there can be more edges with the same source and target;
+in particular there can be more selfloops of the same element.
+It is an important aspect of simplicial sets that there is one
+designated selfloop $s(v)$ which is \emph{the} degenerated selfloop of $v$,
+for any $v\in X_0$. Other selfloops are non-degenerated.
+This aspect is difficult from the constructive point of view,
+since it is in general not possible to distinguish degenerated
+selfloops from non-degenerated ones. {\bf The plan is to solve
+this problem} by making degenerated selfloops
+syntactically distinguishable from non-degenerated ones. 
+
+We now generalize Henkin models by taking $\sbr{A}$ to be a tss, 
+for any type $A$.
+
+\begin{definition}
+A Henkin model with truncated simplicial sets 
+consists of a tss $\sbr{A}$ for each type $A$, 
+together with application mappings that commute with $d_0,d_1,s$. 
+More explicitly, we have for all types $A,B$ (omitting type subscripts):
+\[ 
+ap_0 :\vsbr{A\to B}\times\vsbr{A}\to\vsbr{B}
+\quad\mbox{and}\quad
+ap_1 :\psbr{A\to B}\times\psbr{A}\to\psbr{B}
+\quad\mbox{such that:}
+\]
+\begin{itemize}
+\item $ap_1(s(f),s(a))=ap_1(s(ap_0(f,a)))$ for all
+$f\in\vsbr{A\to B},a\in\vsbr{A}$
+\item $d_i(ap_1(\mu,\omega))=ap_0(d_i(\mu),d_i(\omega))$ for all
+$\mu\in\psbr{A\to B},\omega\in\psbr{A}$ and $i{=}0,1$
+\end{itemize}
+\end{definition}
+
+
+\medskip
+
+For the interpretation of lambda terms it is convenient to work with 
+a name-free syntax for terms $t$ ($c$ for constants and $v_n$ for a De Bruijn index of a variable):
+\[
+t~::=~ c \mid v_n \mid t\,t' \mid \lambda\,t
+\]
+Consequently, an environment assigning values (paths) to free variables
+can be represented simply by a list of values: 
+\[
+\rho~::=~ () \mid (\rho,a)\quad\quad\sigma~::=~ () \mid (\sigma,\alpha)
+\]
+
+Given a value environment $\rho$ we define the path environment 
+$s(\rho)$ recursively by $s()=()$ and $s(\rho,a)=(s(\rho),s(a))$. 
+In other words, $s(\rho)$ is the path environment consisting of all degenerated
+self loops of the values in $\rho$.
+
+Given a path environment $\sigma$ we define the value environments
+$d_i(\sigma)$ recursively by $d_i()=()$ and $d_i(\sigma,\alpha)=(d_i(\sigma),d_i(\alpha))$.
+
+\begin{definition}
+A model of the simple type theory for extensional equality consist of
+a Henkin model with truncated simplicial sets as above, with
+interpretation functions $\semr{\_}$, $\sems{\_}, \semrO{\_}$ for value
+environments $\rho$ and path environments $\sigma$. 
+The following conditions should hold for these data:
+\begin{itemize}
+\item For all $A:U$ and well-typed terms $t_i:A$
+\[
+\semr{t_0 =_A t_1} = \set{p\in\sbr{A}_1 \mid d_i\,p = \semr{t_i}}
+\]
+\item For all well-typed terms with type in $U$ and value environments $\rho$:
+\[
+\sbr{v_0}_{(\rho,v)} = v
+\quad\quad \sbr{v_{n+1}}_{(\rho,v)} = \semr{v_n}
+\quad\quad \semr{t\,t'} = ap_0(\semr{t},\semr{t'})
+\quad\quad ap_0(\semr{\lambda\,t},v) = \sbr{t}_{(\rho,v)}
+\]
+\[
+\semr{\bot}=\emptyset
+\quad\quad \semr{\varphi\to\psi}=\semr{\varphi}\to\semr{\psi}
+\]
+\item For all well-typed terms with type in $U$ and path environments $\sigma$:
+\[
+\sbr{v_0}_{(\sigma,\omega)} = \omega
+\quad\quad  \sbr{v_{n+1}}_{(\sigma,\omega)} = \sems{v_n}
+\quad\quad \sems{t\,t'} = ap_1(\sems{t},\sems{t'})
+\]
+\[
+\sbr{\lambda\,t}_{s(\rho)} = s(\semr{\lambda\,t})
+\quad\quad ap_1(\sems{\lambda\,t},\omega) = \sbr{t}_{(\sigma,\omega)}
+\]
+\item For all well-typed terms with type in $\Omega$ and value environments $\rho$:
+\[
+\sbr{v_0}^{\Omega}_{(\rho,v)} = v
+\quad\quad \sbr{v_{n+1}}^{\Omega}_{(\rho,v)} = \semrO{v_n}
+\quad\quad \semrO{t\,t'} = \semrO{t}(\semrO{t'})
+\quad\quad \semrO{\lambda\,t}(v) = \sbr{t}^{\Omega}_{(\rho,v)}
+\]
+\[
+\Ref\quad\quad\univ\quad\quad\ext\quad\quad{}^+\quad\quad{}^-
+\]
+\end{itemize}
+\end{definition}
+ 
+The requirements for path environments require some more explanation. 
+First, the interpretation
+of a term in a path environment should be a path. 
+For constants without computational behaviour (such as $\top$), 
+the only reasonable thing to do is to require that they are extensionally equal to themselves. 
+This explains $\sems{c} = s(\sbr{c})$.
+Second, degeneracy of paths should be preserved. 
+This leads to $\sbr{\lambda\,t}_{s(\rho)} = s(\semr{\lambda\,t})$,
+which makes it possible to prove Lemma~\ref{degeneracy_preserved}.
+
+\begin{lemma}\label{degeneracy_preserved}
+For every simply typed $t$ and degenerated $\sigma$ we have that
+$\sems{t}$ is a degenerated path.
+\end{lemma}
+\begin{proof} By induction on $t$. 
+If $t$ is a constant this follows from $\sems{c} = s(\sbr{c})$.
+If $t$ is a variable this follows by induction on the path environment.
+The case $t\,t'$ follows from the induction hypotheses and the fact that
+$ap_1$ preserves degeneracy.
+The case $\lambda\,t$ follows from $\sbr{\lambda\,t}_{s(\rho)} = s(\semr{\lambda\,t})$.
+Note that the last requirement 
+$ap_1(\sems{\lambda\,t},\omega) = \sbr{t}_{(\sigma,\omega)}$ 
+is compatible with the lemma, but not necessary for its proof.
+\end{proof}
+
+\section*{Acknowledgement}
+The research for this paper has been carried out for a large part while the authors
+were member and/or visitor of the Institute for Advanced Study in Princeton, as
+part of the program \emph{Univalent Foundations of Mathematics}. 
+We are grateful for the generous support by the IAS.
+
+
+\end{document}
+
+
+-------------------------------------------------------------------
+
+\section{Formalities}
+\subsection{Simple type theory}\label{STT}
+
+ We start with types
+$$
+A~::=~\Omega~|~A\rightarrow A
+$$
+where $\Omega$ is the type of truth-values. We have $\top : \Omega$ and $0 : \top$.
+We assume a typing relation $\Gamma\vdash t:A$.
+
+\subsection{Operational semantics}\label{opsem}
+We define by simultaneous induction the following four judgements:
+\begin{itemize}
+\item $v:A$ (\emph{value}-judgements, expressing that $v$ is a value for type $A$)
+\item $\rho:\Gamma$ (\emph{environment}-judgements,  
+expressing that $\rho(x)$ is a value for $\Gamma(x)$ for all $x$)
+\item $p: u_0 =_A u_1$ (\emph{path}-judgements, expressing that $p$ is a path
+from $u_0$ to $u_1$ in type $A$)
+\item $\alpha:\rho_0 =_\Gamma \rho_1$ (\emph{pathenv}-judgements,  
+expressing that $\alpha(x)$ is a path from $\rho_0(x)$ to $\rho_1(x)$ for all $x$)
+\end{itemize}
+
+\begin{figure}[h]
+\[ 
+\infer{():()}{} 
+\quad\quad
+\infer{\rho(x=v): (\Gamma,x:A)}{\rho:\Gamma \quad v:A} 
+\quad\quad
+\infer{\top:\Omega}{} 
+\quad\quad
+\infer{0:\top}{} 
+\quad\quad
+\infer{t\rho:A}{\Gamma\vdash t:A \quad \rho:\Gamma}
+\quad\quad
+\infer{uv:A}{u:A\to B \quad v:A}
+\]
+\[ 
+\infer{\Ref\,t: t =_A t}{t:A} 
+\quad\quad
+\infer{\univ(p,q):\varphi =_\Omega \psi}{p:\varphi\to\psi\quad q:\psi\to\varphi} 
+\quad\quad
+\infer{\ext\,p: f_0 =_{A\to B} f_1}{must think about this one} 
+\quad\quad
+\infer{\mu\,\omega: f_0\,v_0 =_B f_1\,v_1} {\mu: f_0 =_{A\to B} f_1 \quad \omega: v_0 =_A v_1}
+\]
+\[
+\infer{():()=_{()}()}{} 
+\quad\quad 
+\infer{\alpha(x=\omega):\rho_0(x=v_0) =_{(\Gamma,x:A)}\rho_1(x=v_1)}
+{v_0:A\quad v_1:A\quad \omega:v_0 =_A v_1\quad\alpha:\rho_0 =_{\Gamma}\rho_1}
+\]
+\caption{Rules for the new judgements.
+\label{typing_rules}}
+\end{figure}
+
+The following forms are defined to be \emph{canonical}, i.e., irreducible:
+\begin{itemize}
+\item Values: $(\lam{x}{b})\rho \mid \top \mid (more?)$
+\item Paths: $\Ref\,t \mid \univ(p,q) \mid \ext\,p \mid (\lam{x}{b})\alpha~~(condition!)$ 
+\end{itemize}
+
+\begin{lemma}\label{path_env_in_var}
+If $\alpha:\rho_0 =_{\Gamma}\rho_1$, then $\alpha(y):\rho_0(y) =_B \rho_1(y)$
+for all $y$ such that $y:B$ in $\Gamma$.
+\end{lemma}
+\begin{proof}
+By induction on the length of $\Gamma$. 
+If $\Gamma$ is empty there is nothing to prove.
+Assume the lemma has been proved for $\Gamma$ and consider $\Gamma,y:B$.
+The base case $():() =_{()} ()$ does not apply.
+Consider the induction step:
+$\alpha(x=\omega):\rho_0(x=v_0) =_{(\Gamma,x:A)}\rho_1(x=v_1)$ by
+$v_0:A\quad v_1:A\quad \omega:v_0 =_A v_1\quad\alpha:\rho_0 =_{\Gamma}\rho_1$.
+If $y$ is $x$ we must have $A=B$ and are done by $\omega:v_0 =_A v_1$. 
+If $y:B$ in $\Gamma$ we use the induction hypothesis.
+\end{proof}
+
+\begin{lemma}
+If $\Gamma \vdash t:A$ and $\alpha:\rho_0 =_{\Gamma}\rho_1$,
+then $t\alpha:t\rho_0 =_{\Gamma}t\rho_1$.
+\end{lemma}
+\begin{proof}
+By primary induction on the derivation of $\Gamma \vdash t:A$
+and secondary induction on $\alpha:\rho_0 =_{\Gamma}\rho_1$.
+
+If $\Gamma \vdash x:A$ since $(x:A)\in\Gamma$ and the base case
+applies to $\alpha$ we have $x() \to \Ref\,x : x =_A x$.
+If the step case applies to $\alpha$ we apply Lemma~\ref{path_env_in_var}.
+
+If $\Gamma \vdash M\,N:A$ by Modus Ponens then we can apply the IH to
+$\Gamma \vdash M: B\to A$ and $\Gamma \vdash N:B$ and we are done
+by $(M\,N)\alpha \to (M\alpha)\,(N\alpha)$.
+
+If $\Gamma \vdash \lamt{x}{A}{M}:A\to B$ by ...
+ 
+\end{proof}
+
+------------------------------------------------------------
+
+\section{Very Incomplete: The Closed Term Model}\label{CTM_vp}
+Recall the syntax of types and terms:
+\[
+A~::=~\Omega \mid A\to A \quad\quad t~::=~ c \mid v_n \mid t\,t' \mid \lambda\,t
+\]
+The constants $c$ include:
+\[
+0\mid \top\mid =_A \mid \Ref \mid \unphsi \mid \extfs \mid d_i \mid {}^+ \mid {}^-
+\]
+Recall environments for values and paths:
+\[
+\rho~::=~ () \mid (\rho,a)\quad\quad\sigma~::=~ () \mid (\sigma,\alpha)
+\]
+Closed terms and paths have no free variables ...
+
+Every closed term or path that cannot be reduced by the rules in
+Figure~\ref{value_closure_rules},\ref{path_closure_rules},\ref{constant_rules} above is 
+\emph{canonical}.
+Thus, canonical terms and paths can be classified as follows.
+\begin{itemize}
+\item Values: $(\lambda\,b)\rho \mid \top \mid \top\to \top \mid(more?)$
+\item Paths: $\Ref\,t \mid \univ(p,q) \mid \ext\,(\lambda\,b)\alpha \mid (condition!)$,
+with $b,t$ canonical and, most importantly, $\alpha$ not degenerated.
+The latter means that at least one path in $\alpha$ is not $\Ref t$.
+\end{itemize}
+
+    
+                                                                                  
