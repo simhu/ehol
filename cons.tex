@@ -41,6 +41,7 @@
 \newcommand{\SN}{\mathit{SN}}
 \newcommand{\GamU}{\Gamma_{\!U}}
 \newcommand{\Ex}{\mathsf{Ex}}
+\newcommand{\Ctp}[1]{{#1{\downarrow}}}
 %end Marc's macros
 
 \usepackage{proof} % used for derivations
@@ -473,7 +474,7 @@ We denote path environments by $\pbr{\cdots}$.
 \begin{figure}[h]
 \[ \infer{\vdash}{} \quad\quad\quad\quad
 \infer{\Gamma,x:A\vdash}{\Gamma\vdash A} \quad\quad\quad\quad
-\infer[u\in\set{\Omega,U}]{\Gamma\vdash A}{\Gamma\vdash A:u} \]
+\infer[u\in\set{\Omega,U}~\text{(here and below)}]{\Gamma\vdash A}{\Gamma\vdash A:u} \]
 
 \[ 
 \infer{\Gamma\vdash{\Omega:U}}{\Gamma\vdash} \quad\quad
@@ -487,11 +488,11 @@ We denote path environments by $\pbr{\cdots}$.
 \]
 
 \[ 
-\infer[u\in\set{\Omega,U}]{\Gamma\vdash\lam{x}{b}:{A}\to{B}}
+\infer{\Gamma\vdash\lam{x}{b}:{A}\to{B}}
 {\Gamma,x:A\vdash b:B \quad \Gamma \vdash A:u \quad \Gamma \vdash B:u} 
 \quad\quad
 \infer{\Gamma\vdash f\,a:B}
-  {\Gamma\vdash {A}\to{B}:U\quad\Gamma\vdash f:{A}\to{B}\quad\Gamma\vdash a:A} 
+{\Gamma\vdash {A}\to{B}:u\quad\Gamma\vdash f:{A}\to{B}\quad\Gamma\vdash a:A} 
 \]
 
 \[
@@ -831,34 +832,41 @@ Analogously, $\rho\in\SN$ expresses that $\rho$ is strongly normalizing.
 Similarly for path environments. 
 \end{definition}
 
-By induction on the type $T$ we define
-sets $C(T) \subseteq \SN(T)$ of \emph{computable} closures.
-The induction is subtle: $C$ for $=_{A{\to}B}$ depends on $C$ for $A{\to}B,=_A,=_B$
-and $C(A{\to}B)$ depends on $C$ for $A,B,=_A,=_B$.
+We define for expressions $T$ (`raw closures'?):
+\begin{enumerate}
+\item $\Ctp{T}$, expressing that $T$ is a computable type;
+\item $C(T)$, the set of computable closures of type $T$, provided $\Ctp{T}$;
+\item $D(T,u_0,u_1)$, the set of computable paths from $u_0$ to $u_1$ in type $T$, provided $\Ctp{T}$
+and $u_i \in C(T)$.
+\end{enumerate}
+Note that 'computable closures of type $T$' is here just a way of phrasing membership of $C(T)$,
+and does not refer to the type system. However, type soundness will clarify this terminology.
 
+The induction is subtle: $C$ for $=_{A{\to}B}$ depends on ....
+%$C$ for $A{\to}B,=_A,=_B$ and $C(A{\to}B)$ depends on $C$ for $A,B,=_A,=_B$.
 
 \begin{itemize}
-\item $C(U) = \set{A \mid \text{$A$ is a simple type over $\Omega$}}$
-\item $C(\Omega) = \set{u\in SN(\Omega) \mid u \rtr T
+\item $C(U) = \set{A \mid \text{$A$ reduces to a simple type over $\Omega$}}$
+\item $C(\Omega) = \set{u\in SN \mid u \rtr T
 ~\text{where $T$ is a simple type over $\bot$}}$
-\item $C(\bot) = \set{u\in SN(\bot) \mid u \rtr \foo}$ 
+\item $C(\bot) = \set{u\in SN \mid u \rtr \foo}$ 
 ($\foo$ is a default closure of the empty type $\bot$)
-\item $C(\varphi\to\psi) = \set{u\in SN(\varphi\to\psi) \mid u \rtr (\lambda\,b)\rho 
+\item $C(\varphi\to\psi) = \set{u\in SN \mid u \rtr (\lambda\,b)\rho 
 ~\text{and}~ \forall v\in C(\varphi).\,b(\rho,v) \in C(\psi)}\quad(\varphi,\psi \in C(\Omega))$
-\item $C(A{\to}B) = \set{u\in SN(A{\to}B) \mid u \rtr (\lambda\,b)\rho \quad
+\item $C(A{\to}B) = \set{u\in SN \mid u \rtr (\lambda\,b)\rho \quad
 \text{satisfying 1 and 2 below}}\quad(A,B \in C(U))$
   \begin{enumerate}
   \item $\forall u\in C(A).\,b(\rho,u) \in C(B)$
   \item $\forall \omega\in C(u_0 =_A u_1).\,b(\Ref\,\rho,\omega) 
         \in C(b(\rho,u_0) =_B b(\rho,u_1))$
   \end{enumerate}
-\item $C(\varphi =_\Omega \psi) = \set{\omega\in SN(\varphi =_\Omega \psi) \mid 
+\item $C(\varphi =_\Omega \psi) = \set{\omega\in SN \mid 
 \text{one of $(\Omega1),(\Omega2)$ holds}}\quad(\varphi,\psi \in C(\Omega))$ 
   \begin{enumerate}
   \item[$(\Omega1)$] $\omega \rtr \Ref\,\varphi$ and $\varphi =  \psi$
   \item[$(\Omega2)$] $\omega \rtr \unphsi\,(p,q)$ and $p\in C(\varphi\to\psi)$, $q\in C(\psi\to\varphi)$
   \end{enumerate}
-\item $C(f_0 =_{A{\to}B} f_1) = \set{\omega\in SN(f_0 =_{A{\to}B} f_1) \mid 
+\item $C(f_0 =_{A{\to}B} f_1) = \set{\omega\in SN \mid 
 \text{one of $({\to}1),({\to}2)$ holds}}\quad(f_0,f_1 \in C(A{\to}B))$
   \begin{enumerate}
   \item[$({\to}1)$] $\omega \rtr \Ref\,f_0$ and $f_0 = f_1$
@@ -868,7 +876,7 @@ and $C(A{\to}B)$ depends on $C$ for $A,B,=_A,=_B$.
 \end{itemize}
 
 We observe that the sets $C(T)$ are closed under reduction and
-under expansion (inverse reduction) to a term in $\SN(T)$.
+under expansion (inverse reduction) to a term in $\SN$.
 Equality types are dependent types: they depend on their left- and right-hand side.
 The sets $C(a_0 =_A a_1)$ are ({\bf should be}) invariant under reduction and expansion
 of the $a_i$. ({\bf This depends on the precise definition of $=_w$}).
